@@ -28,6 +28,7 @@ export const CompanyDataCax = ({
   const { t } = useTranslation()
   const [search, setsearch] = useState([])
   const [bpn, setbpn] = useState('')
+  const [BpnErrorMsg, setBpnErrorMsg] = useState("");
   const [legalEntity, setlegalEntity] = useState('')
   const [registeredName, setregisteredName] = useState('')
   const [streetHouseNumber, setstreetHouseNumber] = useState('')
@@ -36,6 +37,16 @@ export const CompanyDataCax = ({
   const [country, setcountry] = useState('')
 
   const onSeachChange = (x: any) => {
+    if(!x.startsWith('BPNL')) {
+      setBpnErrorMsg(t('registrationStepOne.bpnStartError'));
+      return;
+    }else if(x.length > 16) {
+        setBpnErrorMsg(t('registrationStepOne.bpnLengthError'));
+        return;
+    }else{
+        setBpnErrorMsg('');
+    }
+
     setsearch(x)
     const fetchData = async () => {
       const companyDetails = await getCompanyDetails(x)
@@ -53,6 +64,7 @@ export const CompanyDataCax = ({
     fetchData()
       // make sure to catch any error
       .catch((errorCode: number) => {
+        setBpnErrorMsg(t('registrationStepOne.bpnNotExistError'));
         const message = DataErrorCodes.includes(errorCode)
           ? t(`ErrorMessage.${errorCode}`)
           : t(`ErrorMessage.default`)
@@ -96,14 +108,11 @@ export const CompanyDataCax = ({
           </div>
         </div>
         <div className="companydata-form">
-          <Row className="mx-auto col-9">
-            <div className="form-search">
+          <Row className='mx-auto col-9'>
+            <div className={`form-search ${ BpnErrorMsg ? 'error' : ''}`}>
               <label> {t('registrationStepOne.seachDatabase')}</label>
-              <SearchInput
-                className="search-input"
-                value={search}
-                onChange={(search) => onSeachChange(search)}
-              />
+              <SearchInput className="search-input"  value={search} onChange={(search) => onSeachChange(search)} />
+              <label>{BpnErrorMsg}</label>
             </div>
           </Row>
           <Row className="col-9 mx-auto">

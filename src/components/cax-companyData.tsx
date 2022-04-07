@@ -27,7 +27,7 @@ export const CompanyDataCax = ({
 }: CompanyDataProps) => {
   const { t } = useTranslation()
   const [search, setsearch] = useState([])
-  const [bpn, setbpn] = useState('')
+  const [bpn, setBpn] = useState('')
   const [legalEntity, setlegalEntity] = useState('')
   const [registeredName, setregisteredName] = useState('')
   const [streetHouseNumber, setstreetHouseNumber] = useState('')
@@ -35,15 +35,11 @@ export const CompanyDataCax = ({
   const [city, setcity] = useState('')
   const [country, setcountry] = useState('')
 
-  const setInputValue = (value, name) => {
-    if(name === 'bpn') setbpn(value);
-  }
-
   const onSeachChange = (x: any) => {
     setsearch(x)
     const fetchData = async () => {
       const companyDetails = await getCompanyDetails(x)
-      setbpn(companyDetails?.[0]?.bpn)
+      setBpn(companyDetails?.[0]?.bpn)
       setlegalEntity(companyDetails?.[0]?.names?.[0]?.value)
       setregisteredName(companyDetails?.[0]?.names?.[0]?.value)
       setstreetHouseNumber(
@@ -120,7 +116,7 @@ export const CompanyDataCax = ({
           <Row className='mx-auto col-9'>
             <div className='form-data'>
               <label> {t('registrationStepOne.bpn')} <AiOutlineQuestionCircle color='#939393' data-tip="hello world" /></label>
-              <input type="text" value={bpn} onChange={e => setInputValue(e.target.value, 'bpn')} />
+              <input type="text" value={bpn} onChange={e => setBpn(e.target.value)} />
               <div className='company-hint'>{t('registrationStepOne.helperText')}</div>
             </div>
           </Row>

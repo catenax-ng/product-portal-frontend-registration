@@ -1,5 +1,5 @@
 const LOCAL_SERVICES_FRONTEND = 'https://portal.dev.demo.catena-x.net'
-const LOCAL_SERVICES_BACKEND = 'https://portal-backend.dev.demo.catena-x.net'
+const LOCAL_SERVICES_BACKEND = 'http://localhost:5000'
 
 export const getHostname = () => window.location.hostname
 
@@ -21,7 +21,7 @@ export const getCentralIdp = () => {
     return 'https://centralidp-pen.dev.demo.catena-x.net/auth'
   if (hostname === 'portal.catena-x.net')
     return 'https://centralidp.catena-x.net/auth'
-  return 'https://centralidp.dev.demo.catena-x.net/auth'
+  return 'https://wsl:8443/iamcentral/auth'
 }
 
 const EnvironmentService = {

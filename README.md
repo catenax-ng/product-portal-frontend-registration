@@ -1,15 +1,7 @@
 # Catena-X Portal Registration App
 
-Frontend for the Catena-X Registration App.
+The registration app has moved and this repository is now deprecated.
+Find the code at the new location:
 
-* Dev Install: https://portal-dev.demo.catena-x.net/registration/
-
-
-Run the application on your machine on http://localhost:3000/registration/
-
-### Local build & run
-
-    yarn
-    yarn build
-    yarn start
+https://github.com/catenax-ng/tx-portal-frontend-registration
 
